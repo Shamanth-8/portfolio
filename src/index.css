@@ -19,6 +19,16 @@ body,
   height: 100%;
 }
 
+/* Dynamic viewport units keep the layout correct as mobile browser chrome
+   collapses; the 100% above stays as the fallback. */
+@supports (height: 100dvh) {
+  html,
+  body,
+  #root {
+    height: 100dvh;
+  }
+}
+
 body {
   margin: 0;
   /* Matches the room so any sub-pixel gap around the machine is invisible. */

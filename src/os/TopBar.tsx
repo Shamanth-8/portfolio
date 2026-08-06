@@ -7,6 +7,7 @@ import { PROFILE } from '../data/profile'
 import { GithubIcon, LinkedinIcon } from './BrandIcons'
 import type { IconProps } from './BrandIcons'
 import { useShell } from './shell'
+import { useIsMobile } from './useIsMobile'
 import { useWindows } from './store'
 
 const LINKS: { href: string; label: string; icon: ComponentType<IconProps> }[] = [
@@ -20,18 +21,20 @@ export function TopBar() {
   const activeId = useWindows((s) => s.activeId)
   const focus = useWindows((s) => s.focus)
   const booted = useShell((s) => s.booted)
+  const isMobile = useIsMobile()
   const clock = useClock()
 
   return (
     <header className="absolute inset-x-0 top-0 z-[9999] flex h-9 items-center gap-2 border-b border-line bg-surface/80 px-2 backdrop-blur sm:gap-3 sm:px-3">
-      <span className="hidden font-mono text-xs font-medium text-fg sm:inline">
+      <span className="font-mono text-xs font-medium text-fg">
         {PROFILE.handle}
-        <span className="text-muted">@dev-station</span>
+        <span className="hidden text-muted sm:inline">@dev-station</span>
       </span>
 
-      {/* Running apps — minimized windows come back from here. */}
+      {/* Running apps — minimized windows come back from here. Mobile has no
+          window layer to return to, so these are desktop-only. */}
       <div className="flex min-w-0 flex-1 items-center gap-1 overflow-hidden">
-        {windows.map((win) => {
+        {(isMobile ? [] : windows).map((win) => {
           const app = APPS[win.appId]
           const Icon = app.icon
           const active = win.id === activeId && !win.minimized
@@ -121,7 +124,7 @@ function HomeButton({ index, booted }: { index: number; booted: boolean }) {
       whileHover="hover"
       whileTap={{ scale: 0.94 }}
       variants={{ hover: { y: -1 } }}
-      className="flex items-center gap-1.5 rounded-md px-1.5 py-1 font-mono text-[11px] text-fg/80 transition-colors hover:bg-accent/15 hover:text-accent"
+      className="flex items-center gap-1.5 rounded-md px-2 py-1.5 font-mono text-[11px] text-fg/80 sm:px-1.5 sm:py-1 transition-colors hover:bg-accent/15 hover:text-accent"
     >
       <motion.span
         className="relative flex"
@@ -171,7 +174,7 @@ function RailLink({
       animate={booted ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
       transition={{ delay: 0.35 + index * 0.09, type: 'spring', stiffness: 420, damping: 24 }}
       whileHover={{ y: -1 }}
-      className="flex items-center gap-1.5 rounded-md px-1.5 py-1 font-mono text-[11px] text-fg/80 transition-colors hover:bg-accent/15 hover:text-accent"
+      className="flex items-center gap-1.5 rounded-md px-2 py-1.5 font-mono text-[11px] text-fg/80 sm:px-1.5 sm:py-1 transition-colors hover:bg-accent/15 hover:text-accent"
     >
       <Icon size={13} />
       <span className="hidden md:inline">{label}</span>

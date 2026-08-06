@@ -106,10 +106,15 @@ export function Reboot({ onDone }: { onDone: (boot: AppId) => void }) {
             </div>
 
             <div className="mt-4 w-full max-w-[520px] space-y-1 text-muted">
-              <p>Use the ↑ and ↓ keys to select which entry is highlighted.</p>
+              {/* There are no arrow keys on a phone, so say what does work there. */}
+              <p className="hidden sm:block">
+                Use the ↑ and ↓ keys to select which entry is highlighted.
+              </p>
+              <p className="sm:hidden">Tap an entry to boot it.</p>
               <p>
-                Press enter to boot the selected OS. The highlighted entry will be executed
-                automatically in <span className="text-fg">{left}s</span>.
+                <span className="hidden sm:inline">Press enter to boot the selected OS. </span>The
+                highlighted entry will be executed automatically in{' '}
+                <span className="text-fg">{left}s</span>.
               </p>
             </div>
           </motion.div>

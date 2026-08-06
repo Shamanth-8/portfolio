@@ -2,18 +2,23 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { Maximize2, Minimize2 } from 'lucide-react'
 import { useShell } from './shell'
+import { useIsMobile } from './useIsMobile'
 import { useWindows } from './store'
 
 /**
  * The physical machine: a monitor whose screen hosts the whole desktop.
  * `immersive` sheds the bezel so the screen fills the viewport — same DOM node,
  * so windows keep their state across the transition.
+ *
+ * On a phone the bezel is dropped entirely: the device in your hand already is
+ * the machine, and a drawn one would only eat the screen space that matters.
  */
 export function Machine({ children }: { children: React.ReactNode }) {
   const immersive = useShell((s) => s.immersive)
   const toggleImmersive = useShell((s) => s.toggleImmersive)
   const booted = useShell((s) => s.booted)
   const setScreen = useWindows((s) => s.setScreen)
+  const isMobile = useIsMobile()
   const screenRef = useRef<HTMLDivElement>(null)
 
   // The window manager measures against the screen element, not the viewport.
@@ -27,6 +32,14 @@ export function Machine({ children }: { children: React.ReactNode }) {
     ro.observe(el)
     return () => ro.disconnect()
   }, [setScreen])
+
+  if (isMobile) {
+    return (
+      <div ref={screenRef} className="crt relative h-full w-full overflow-hidden bg-bg">
+        {children}
+      </div>
+    )
+  }
 
   return (
     <div className="room relative flex h-full w-full flex-col items-center justify-center overflow-hidden p-3 sm:p-6">
@@ -46,8 +59,8 @@ export function Machine({ children }: { children: React.ReactNode }) {
           className={
             immersive
               ? 'crt relative h-full w-full overflow-hidden bg-bg'
-              // The cap leaves room for the chin and stand below the screen.
-              : 'crt relative aspect-[16/10] max-h-[calc(100vh-190px)] w-full overflow-hidden rounded-lg bg-bg sm:rounded-xl'
+              : // The cap leaves room for the chin and stand below the screen.
+                'crt relative aspect-[16/10] max-h-[calc(100vh-190px)] w-full overflow-hidden rounded-lg bg-bg sm:rounded-xl'
           }
         >
           {children}

@@ -336,6 +336,9 @@ export function Terminal() {
           onKeyDown={onKeyDown}
           spellCheck={false}
           autoComplete="off"
+          // Phone keyboards otherwise capitalise and autocorrect every command.
+          autoCapitalize="none"
+          autoCorrect="off"
           aria-label="terminal input"
           className="flex-1 bg-transparent text-fg caret-accent outline-none"
         />
