@@ -65,6 +65,7 @@ src/
    ├─ profile.ts        name, links, contact details
    ├─ projects.ts       projects and their domains
    ├─ skills.ts         grouped skills
+   
    └─ experience.ts     roles, education, achievements, certifications
 ```
 
@@ -84,10 +85,6 @@ open windows re-fitting instead of stranding themselves off-screen.
 The icon column, the taskbar, the terminal's `open` command and the GRUB boot menu all read
 from that table, so nothing else needs editing.
 
-## Credits
+33 outlook
 
-Built with [Claude Code](https://claude.com/claude-code).
-
-## License
-
-MIT
+<img width="1894" height="907" alt="image" src="https://github.com/user-attachments/assets/b77f10ba-ee64-4ca9-94b6-a90c50d81175" />
