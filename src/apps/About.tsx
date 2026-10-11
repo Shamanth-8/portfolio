@@ -4,8 +4,9 @@ import { EDUCATION } from '../data/experience'
 import { DOMAINS, PROJECTS } from '../data/projects'
 
 const BIO = [
-  'Final-year B.Tech AI & ML student at M S Ramaiah University, currently Tech Lead and AI Engineer at Aakaario — where I architected a multi-agent pipeline that turns a single natural-language prompt into a deployable full-stack app.',
+  'B.Tech AI & ML (2026) from M S Ramaiah University, currently Tech Lead and AI Engineer at Aakaario — where I led the MVP and built the engine that turns a single prompt into a deployable full-stack app.',
   'My work sits where models meet engineering: a GraphSAGE fraud detector scoring ~2,000 accounts with SHAP explanations behind every score, a RAG engine answering questions over live market news with citations, a Vision Transformer written from first principles. Each one shipped with an interface someone can actually use.',
+  'Lately I have been going deep on cybersecurity: an Nmap-based vulnerability scanner with CVSS-scored reports, a Flask app broken across the OWASP Top 10 and then hardened with a SAST pipeline, a threat-intel dashboard that flags anomalous IOCs, and a merged RCE fix in an open-source codebase.',
   'I care about the parts that make a model trustworthy — explainability, prompt-injection defences, fallbacks when an API rate-limits — and about the deploy step that gets it in front of people.',
 ]
 

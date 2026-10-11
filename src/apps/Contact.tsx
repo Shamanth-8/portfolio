@@ -20,7 +20,7 @@ export function Contact() {
     <div className="p-5">
       <p className="font-mono text-[11px] text-ok">$ ./contact.sh</p>
       <p className="mt-3 text-xs text-muted">
-        Open to AI/ML, data and full-stack roles. Fastest reply is email.
+        Open to AI/ML, data, full-stack and security roles. Fastest reply is email.
       </p>
 
       <div className="mt-4 space-y-1.5">

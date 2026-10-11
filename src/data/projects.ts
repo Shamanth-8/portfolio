@@ -1,12 +1,12 @@
 export type Domain = 'ai-ml' | 'data' | 'backend' | 'frontend' | 'devops' | 'security'
 
 export const DOMAINS: { id: Domain; label: string; blurb: string }[] = [
-  { id: 'ai-ml', label: 'AI / ML', blurb: 'graph ML, transformers, RAG' },
+  { id: 'ai-ml', label: 'AI / ML', blurb: 'agents, RAG, graph ML' },
   { id: 'data', label: 'Data / BI', blurb: 'risk analytics, dashboards' },
   { id: 'backend', label: 'Backend', blurb: 'APIs, services, data stores' },
   { id: 'frontend', label: 'Frontend', blurb: 'React, Streamlit surfaces' },
   { id: 'devops', label: 'DevOps', blurb: 'Docker, deploys, queues' },
-  { id: 'security', label: 'Security', blurb: 'RCE patch, LLM hardening' },
+  { id: 'security', label: 'Security', blurb: 'AppSec, vuln scanning, threat intel' },
 ]
 
 export interface Project {
@@ -18,10 +18,11 @@ export interface Project {
   /** Lead with the outcome, not the tech. */
   highlights: string[]
   stack: string[]
-  /** TODO: paste the exact repo URL — the button only renders once this is set. */
   repo?: string
   demo?: string
 }
+
+const GH = 'https://github.com/Shamanth-8'
 
 export const PROJECTS: Project[] = [
   {
@@ -36,6 +37,88 @@ export const PROJECTS: Project[] = [
       'HSBC Hackathon finalist.',
     ],
     stack: ['Python', 'PyTorch Geometric', 'GraphSAGE', 'NetworkX', 'SHAP', 'Streamlit', 'Plotly'],
+    repo: `${GH}/fraud-detection`,
+  },
+  {
+    slug: 'reggraph',
+    name: 'RegGraph — Agentic SEBI Compliance',
+    domains: ['ai-ml', 'backend', 'data'],
+    tagline: 'SEBI circulars in, auditable compliance obligations out.',
+    highlights: [
+      'Turns unstructured SEBI circulars into structured obligations — severity, deadline, owner and required evidence — then generates action items per intermediary and role.',
+      'A local TF-IDF + logistic-regression model extracts obligations offline in ~1s: precision 1.00 / recall 0.93 on held-out circulars, and 1,391 obligations from the unseen 399-page Stock Broker Master Circular in 7s.',
+      'LLM agents enrich the local results and run a semantic diff (NEW / MODIFIED / SUPERSEDED, naming the changed field); a NetworkX graph propagates impact to dependent obligations.',
+      'Degrades gracefully — with the LLM provider down, the pipeline still returns every obligation, with a timestamped audit trail.',
+    ],
+    stack: ['Python', 'scikit-learn', 'FastAPI', 'Streamlit', 'NetworkX', 'FAISS', 'OpenRouter'],
+    repo: `${GH}/SEBI`,
+  },
+  {
+    slug: 'tradeo',
+    name: 'Tradeo — Local-First AI Market Lab',
+    domains: ['ai-ml', 'backend', 'frontend', 'data'],
+    tagline: 'Open-source paper-trading lab for Indian markets, running on a laptop LLM.',
+    highlights: [
+      'Chat or talk to a local LLM (Ollama, Whisper in, Piper out) that scans NSE/BSE, reviews picks and runs intraday, swing and daily-pick agents on a virtual ₹10 lakh account with realistic Indian charges.',
+      'Experimental RL trader built on the fruit fly’s mushroom-body connectome (6,293 neurons from FlyWire), learning from dopamine-style reward-prediction error on every closed trade.',
+      'Honest by design: every strategy shows its backtest after charges against random picks, and stops, targets and sizing are computed in code — never by the language model.',
+      'FastAPI + React/Vite, pluggable LLMs, data sources and brokers; 55 pytest tests and GitHub Actions CI on every push.',
+    ],
+    stack: ['Python', 'FastAPI', 'React', 'Ollama', 'scikit-learn', 'DuckDB', 'GitHub Actions'],
+    repo: `${GH}/tradeo`,
+  },
+  {
+    slug: 'vuln-scanner',
+    name: 'Automated Vulnerability Scanner',
+    domains: ['security', 'devops'],
+    tagline: 'Nmap NSE recon to a CVSS-scored, client-ready report in one command.',
+    highlights: [
+      'Wraps Nmap’s scripting engine with ~25 curated NSE checks — SQLi, XSS, Shellshock, Heartbleed, EternalBlue, weak SSH/FTP/MySQL credentials — and maps every finding to a CVSS score and a remediation step.',
+      'Generates HTML and PDF reports (Jinja2 + WeasyPrint) and posts a Slack summary, turning hours of manual recon into a single run.',
+      'Weekly GitHub Actions scan acts as a security gate: exit code 2 on critical findings fails the pipeline and fires alerts.',
+    ],
+    stack: ['Python', 'Nmap / NSE', 'CVSS', 'Jinja2', 'WeasyPrint', 'pytest', 'GitHub Actions'],
+    repo: `${GH}/vuln-scanner`,
+  },
+  {
+    slug: 'secure-webapp',
+    name: 'Secure Web App + SAST Pipeline',
+    domains: ['security', 'backend', 'devops'],
+    tagline: 'Broke a Flask app across the OWASP Top 10, then fixed and hardened it.',
+    highlights: [
+      'Built an intentionally vulnerable Flask app and a fixed twin: SQL/command injection, XSS, IDOR, SSRF, MD5 passwords and session fixation, each patched with an annotated fix.',
+      'Controls: parameterised queries, bcrypt (cost 12), CSRF tokens, bleach sanitisation, rate limiting, SSRF allowlisting, security headers and auth-event logging.',
+      'SAST on every push — Bandit, pip-audit and gitleaks, with SARIF results in the GitHub Security tab.',
+      'Hardened Docker deploy behind Nginx TLS and Gunicorn: non-root user, read-only filesystem, all capabilities dropped, isolated internal network.',
+    ],
+    stack: ['Python', 'Flask', 'Bandit', 'gitleaks', 'Docker', 'Nginx', 'GitHub Actions'],
+    repo: `${GH}/secure-webapp`,
+  },
+  {
+    slug: 'threat-intel-dashboard',
+    name: 'Threat Intelligence Dashboard',
+    domains: ['security', 'ai-ml', 'data'],
+    tagline: 'IOC aggregation with ML anomaly detection for SOC triage.',
+    highlights: [
+      'Ingests IOCs from AbuseIPDB, abuse.ch, Shodan and HIBP into a normalised SQLite store, deduplicating across feeds and keeping the highest-confidence record.',
+      'Enriches each IOC with GeoIP, reverse DNS and cross-source corroboration, then flags unusual indicators with an Isolation Forest model.',
+      'Streamlit analyst workflow: triage anomalies by score, mark as reviewed or escalate, export to CSV — with a mock mode for demoing without paid feeds.',
+    ],
+    stack: ['Python', 'scikit-learn', 'Pandas', 'SQLite', 'Streamlit', 'pytest'],
+    repo: `${GH}/threat-intel-dashboard`,
+  },
+  {
+    slug: 'aden-hive-rce',
+    name: 'Aden Hive — RCE Patch (Open Source)',
+    domains: ['security'],
+    tagline: 'Found and fixed a remote code execution hole in a production codebase.',
+    highlights: [
+      'Identified a critical RCE caused by unsafe eval() usage in a production open-source codebase.',
+      'Replaced it with a secure AST-based expression evaluator — the fix keeps the feature, removes the arbitrary execution path.',
+      'Pull request reviewed and merged to main.',
+    ],
+    stack: ['Python', 'AST', 'Secure code review'],
+    repo: 'https://github.com/aden-hive/hive/pull/402',
   },
   {
     slug: 'news-sentiment-analyzer',
@@ -49,6 +132,8 @@ export const PROJECTS: Project[] = [
       'Shipped twice over — Streamlit Cloud for browser, Telegram bot (@Blackbuck_bot) for mobile.',
     ],
     stack: ['Python', 'LangChain LCEL', 'FAISS', 'FastEmbed', 'Groq', 'VADER', 'Streamlit'],
+    repo: `${GH}/stocksenti`,
+    demo: 'https://stocksenti-qfgcct823xgeos9vssvk4m.streamlit.app',
   },
   {
     slug: 'code-bunny',
@@ -62,6 +147,7 @@ export const PROJECTS: Project[] = [
       '13 production deployments and 3 outside contributors on GitHub.',
     ],
     stack: ['Python', 'FastAPI', 'Streamlit', 'Gemini API', 'Docker Compose', 'AST', 'Radon'],
+    repo: `${GH}/rabbitai`,
   },
   {
     slug: 'vit-cifar10',
@@ -74,6 +160,7 @@ export const PROJECTS: Project[] = [
       'Served through Flask with weights held in memory, so inference does not reload per request.',
     ],
     stack: ['Python', 'PyTorch', 'Flask'],
+    repo: `${GH}/dalle`,
   },
   {
     slug: 'nse-sector-risk',
@@ -86,6 +173,7 @@ export const PROJECTS: Project[] = [
       'Normalised SQLite warehouse (7 tables plus custom SQL views) feeding Power BI–ready exports.',
     ],
     stack: ['Python', 'Pandas', 'SQLite', 'Power BI', 'yfinance'],
+    repo: `${GH}/risk-analysis`,
   },
   {
     slug: 'ecommerce-sales-analysis',
@@ -98,6 +186,7 @@ export const PROJECTS: Project[] = [
       'Excel forecasting (moving averages, trend extrapolation) to flag downward trends ahead of quarterly reviews.',
     ],
     stack: ['SQL', 'Power BI', 'Power Query', 'Excel'],
+    repo: `${GH}/E-Commerce-Sales-Analysis`,
   },
   {
     slug: 'typedrop',
@@ -110,6 +199,7 @@ export const PROJECTS: Project[] = [
       'Deployed to Render with environment-based MongoDB Atlas configuration and data-integrity testing.',
     ],
     stack: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'EJS'],
+    repo: `${GH}/typedrop`,
   },
   {
     slug: 'url-shortener',
@@ -122,18 +212,7 @@ export const PROJECTS: Project[] = [
       'Endpoint-tested with Postman and manual QA, deployed to Render with a responsive history-tracking UI.',
     ],
     stack: ['React', 'Vite', 'Node.js', 'Express', 'Nanoid'],
-  },
-  {
-    slug: 'aden-hive-rce',
-    name: 'Aden Hive — RCE Patch (Open Source)',
-    domains: ['security'],
-    tagline: 'Found and fixed a remote code execution hole in a production codebase.',
-    highlights: [
-      'Identified a critical RCE caused by unsafe eval() usage in a production open-source codebase.',
-      'Replaced it with a secure AST-based expression evaluator — the fix keeps the feature, removes the arbitrary execution path.',
-      'Pull request reviewed and merged to main.',
-    ],
-    stack: ['Python', 'AST', 'Secure code review'],
+    repo: `${GH}/urlshortner`,
   },
 ]
 

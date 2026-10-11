@@ -16,7 +16,7 @@ const LINES: [string, string][] = [
   ['OK', 'Restored FAISS index (1,000+ documents)'],
   ['OK', 'Started docker.service'],
   ['OK', 'Started fastapi.service — listening :8000'],
-  ['OK', 'Connected to bullmq worker queue'],
+  ['OK', 'Loaded nmap NSE scripts + bandit ruleset'],
   ['OK', `Mounted /projects (${PROJECT_COUNT} entries)`],
   ['OK', 'Started portfolio-wm.service'],
   ['', ''],

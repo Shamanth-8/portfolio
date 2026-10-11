@@ -11,16 +11,13 @@ export const ROLES: Role[] = [
   {
     company: 'Aakaario',
     title: 'Tech Lead & AI Engineer',
-    location: 'Bangalore, India',
-    summary: 'Vibe-coding SaaS — full websites, forms and databases from one natural-language prompt.',
+    location: 'Bengaluru, India',
+    summary: 'AI SaaS that builds full websites, forms and databases from a single prompt.',
     bullets: [
-      'Led the end-to-end MVP build, the product used to pitch early investors.',
-      'Architected a multi-agent pipeline — Boss, Blueprint, Backend, Frontend and Deploy agents on Claude Sonnet/Haiku with BullMQ job queues — producing deployable Node.js/TypeScript full-stack apps.',
-      'Built the code and UI generation engine: plain-English prompts to production-ready, brand-matched frontend components with real-time preview and one-click deploy.',
-      'Owned backend infrastructure and Next.js 14 frontend architecture while running a cross-functional team of 2 interns through sprint planning and Jira epics.',
-      'Turned demo and onboarding feedback into prioritised feature requirements, and kept stakeholders aligned on timelines and milestones.',
+      'Architected the company’s multi-agent AI system.',
+      'Lead technical direction.',
     ],
-    stack: ['Next.js 14', 'TypeScript', 'Node.js', 'Claude API', 'BullMQ', 'Redis', 'Jira'],
+    stack: ['Next.js 14', 'TypeScript', 'Node.js', 'LLM APIs', 'Redis', 'Jira'],
   },
 ]
 

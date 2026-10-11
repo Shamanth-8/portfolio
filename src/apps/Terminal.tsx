@@ -135,7 +135,6 @@ const COMMANDS: Record<string, { help: string; run: (ctx: Ctx) => void }> = {
         github: PROFILE.github,
         linkedin: PROFILE.linkedin,
         leetcode: PROFILE.leetcode,
-        resume: PROFILE.resume,
       }
       const apps: AppId[] = ['about', 'experience', 'projects', 'skills', 'terminal', 'contact']
 
