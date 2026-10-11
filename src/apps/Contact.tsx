@@ -11,7 +11,7 @@ const ROWS: { label: string; value: string; href?: string; icon: ComponentType<I
   { label: 'phone', value: PROFILE.phone, href: `tel:${PROFILE.phone.replace(/\s/g, '')}`, icon: Phone },
   { label: 'location', value: PROFILE.location, icon: MapPin },
   { label: 'github', value: 'github.com/Shamanth-8', href: PROFILE.github, icon: GithubIcon },
-  { label: 'linkedin', value: 'shamanth-patel', href: PROFILE.linkedin, icon: LinkedinIcon },
+  { label: 'linkedin', value: 'shamanthpatel', href: PROFILE.linkedin, icon: LinkedinIcon },
   { label: 'leetcode', value: 'Shamanthpatel', href: PROFILE.leetcode, icon: SquareCode },
 ]
 

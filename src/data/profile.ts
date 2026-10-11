@@ -7,6 +7,6 @@ export const PROFILE = {
   email: 'shamanthpatel83@gmail.com',
   phone: '+91 80738 01259',
   github: 'https://github.com/Shamanth-8',
-  linkedin: 'https://linkedin.com/in/shamanth-patel-ba216a386',
+  linkedin: 'https://www.linkedin.com/in/shamanthpatel/',
   leetcode: 'https://leetcode.com/u/Shamanthpatel/',
 }
