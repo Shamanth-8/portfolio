@@ -15,7 +15,7 @@ export const ROLES: Role[] = [
     summary: 'AI SaaS that builds full websites, forms and databases from a single prompt.',
     bullets: [
       'Architected the company’s multi-agent AI system.',
-      'Lead technical direction.',
+      'Led technical direction.',
     ],
     stack: ['Next.js 14', 'TypeScript', 'Node.js', 'LLM APIs', 'Redis', 'Jira'],
   },
@@ -24,8 +24,7 @@ export const ROLES: Role[] = [
 export const EDUCATION = {
   school: 'M S Ramaiah University of Applied Sciences',
   degree: 'B.Tech, Artificial Intelligence and Machine Learning',
-  period: 'Aug 2022 – Jun 2026',
-  detail: 'CGPA 7.5 / 10 · Bangalore, India',
+  period: '2026',
 }
 
 export const ACHIEVEMENTS = [

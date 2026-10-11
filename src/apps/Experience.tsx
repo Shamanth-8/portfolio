@@ -47,7 +47,7 @@ export function Experience() {
         <p className="font-mono text-xs text-fg">{EDUCATION.degree}</p>
         <p className="mt-0.5 text-[11px] text-muted">{EDUCATION.school}</p>
         <p className="mt-0.5 font-mono text-[10px] text-muted">
-          {EDUCATION.period} · {EDUCATION.detail}
+          {EDUCATION.period}
         </p>
       </Block>
 
